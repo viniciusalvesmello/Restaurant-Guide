@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "622895182238",
+    "firebase_url": "https://restaurantguide.firebaseio.com",
+    "project_id": "restaurantguide",
+    "storage_bucket": "restaurantguide.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622895182238:android:6250dad88967fc20",
+        "android_client_info": {
+          "package_name": "io.github.viniciusalvesmello.restaurantguide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622895182238-dn6m0d4gjrkld9t728kckutbp807mfae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0uvBcXWJf0s5HN7vW8IIwpLrJw1Q4EOE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

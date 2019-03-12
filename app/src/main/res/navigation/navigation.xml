@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation"
+            app:startDestination="@id/citiesFragment">
+
+    <fragment android:id="@+id/citiesFragment"
+              android:name="io.github.viniciusalvesmello.restaurantguide.features.cities.CitiesFragment"
+              android:label="cities_fragment" tools:layout="@layout/cities_fragment">
+        <action android:id="@+id/action_citiesFragment_to_restaurantsFragment"
+                app:destination="@id/restaurantsFragment"/>
+    </fragment>
+    <fragment android:id="@+id/restaurantsFragment"
+              android:name="io.github.viniciusalvesmello.restaurantguide.features.restaurants.RestaurantsFragment"
+              android:label="restaurants_fragment" tools:layout="@layout/restaurants_fragment">
+        <action android:id="@+id/action_restaurantsFragment_to_restaurantDetailsFragment"
+                app:destination="@id/restaurantDetailsFragment"
+                app:popUpToInclusive="false" app:launchSingleTop="false"/>
+    </fragment>
+    <fragment android:id="@+id/restaurantDetailsFragment"
+              android:name="io.github.viniciusalvesmello.restaurantguide.features.restaurants.RestaurantDetailsFragment"
+              android:label="restaurant_details_fragment" tools:layout="@layout/restaurant_details_fragment">
+        <action android:id="@+id/action_restaurantDetailsFragment_to_restaurantMapsFragment"
+                app:destination="@id/restaurantMapsFragment"/>
+    </fragment>
+    <fragment android:id="@+id/restaurantMapsFragment"
+              android:name="io.github.viniciusalvesmello.restaurantguide.features.restaurants.RestaurantMapsFragment"
+              android:label="fragment_restaurant_maps" tools:layout="@layout/fragment_restaurant_maps"/>
+</navigation>

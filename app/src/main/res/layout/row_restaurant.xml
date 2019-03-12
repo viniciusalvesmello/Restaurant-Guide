@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view_restaurant"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/card_view_restaurant_min_height"
+    app:cardElevation="@dimen/card_elevation"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_view_restaurant"
+            android:layout_width="@dimen/image_view_thumb_restaurant_width"
+            android:layout_height="@dimen/image_view_thumb_restaurant_height"
+            android:cropToPadding="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/no_image"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_rating_restaurant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/rating"
+            android:textSize="@dimen/text_rating_restaurant"
+            app:layout_constraintStart_toEndOf="@+id/image_view_restaurant"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_name_restaurant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="@dimen/text_name_restaurant"
+            app:layout_constraintStart_toEndOf="@+id/image_view_restaurant"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_rating_restaurant"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_locality_restaurant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/locality"
+            android:textSize="@dimen/text_locality_restaurant"
+            app:layout_constraintStart_toEndOf="@+id/image_view_restaurant"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_name_restaurant"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
