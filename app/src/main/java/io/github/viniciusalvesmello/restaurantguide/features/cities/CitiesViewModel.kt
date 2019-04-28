@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel;
 import io.github.viniciusalvesmello.restaurantguide.features.cities.model.CityView
 
 class CitiesViewModel : ViewModel() {
+    private var _inProcessLoadCities = MutableLiveData<Boolean>()
+    val inProcessLoadCities: LiveData<Boolean>
+        get() = _inProcessLoadCities
     private val _listCities = MutableLiveData<List<CityView>>()
     private val cities: MutableList<CityView> = mutableListOf()
     val listCities: LiveData<List<CityView>>
@@ -26,6 +29,11 @@ class CitiesViewModel : ViewModel() {
                 imageUrl = "https://gideonimaran.files.wordpress.com/2011/07/jkpan1.jpg"
             )
         )
+    }
+
+    fun loadCities() {
+        _inProcessLoadCities.value = true
         _listCities.value = cities
+        _inProcessLoadCities.value = false
     }
 }
