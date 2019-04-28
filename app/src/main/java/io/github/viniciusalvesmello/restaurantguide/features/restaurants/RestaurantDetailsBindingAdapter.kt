@@ -1,4 +1,4 @@
-package io.github.viniciusalvesmello.restaurantguide.features.restaurants.binding
+package io.github.viniciusalvesmello.restaurantguide.features.restaurants
 
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
