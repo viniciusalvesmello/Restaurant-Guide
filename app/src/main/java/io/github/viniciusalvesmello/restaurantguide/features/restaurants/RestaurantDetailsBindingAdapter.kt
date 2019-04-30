@@ -19,11 +19,4 @@ object RestaurantDetailsBindingAdapter {
         }
     }
 
-    @JvmStatic
-    @BindingAdapter("android:adapter")
-    fun setAdapterRestaurantReviews(recyclerView : RecyclerView, listRestaurantReviews: List<RestaurantReviewView>){
-        recyclerView.adapter = RestaurantDetailsReviewsAdapter(listRestaurantReviews)
-        recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
-    }
-
 }
