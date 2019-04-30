@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.crashlytics.android.Crashlytics
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -12,6 +13,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import io.fabric.sdk.android.Fabric
 import io.github.viniciusalvesmello.restaurantguide.R
+import io.github.viniciusalvesmello.restaurantguide.databinding.FragmentRestaurantMapsBinding
 import io.github.viniciusalvesmello.restaurantguide.features.restaurants.model.RestaurantView
 import io.github.viniciusalvesmello.restaurantguide.utils.extension.onBackPressed
 import io.github.viniciusalvesmello.restaurantguide.utils.extension.toRestaurantView
@@ -29,7 +31,12 @@ class RestaurantMapsFragment : Fragment() {
         SupportMapFragment.newInstance()
     }
 
-    init {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Fabric.with(context, Crashlytics())
+        restaurantView = arguments?.toRestaurantView() ?: RestaurantView.toEmpty()
         mapFragment.getMapAsync { googleMap ->
             if (googleMap != null) {
                 latLngRestaurant = LatLng(restaurantView.latitude.toDouble(), restaurantView.longitude.toDouble())
@@ -42,15 +49,11 @@ class RestaurantMapsFragment : Fragment() {
                 )
             }
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        Fabric.with(context, Crashlytics())
-        restaurantView = arguments?.toRestaurantView() ?: RestaurantView.toEmpty()
-        return inflater.inflate(R.layout.fragment_restaurant_maps, container, false)
+        val binding : FragmentRestaurantMapsBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_restaurant_maps, container, false
+        )
+        binding.restaurant = restaurantView
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -58,7 +61,6 @@ class RestaurantMapsFragment : Fragment() {
         constraint_layout_back_pressed.setOnClickListener {
             it.onBackPressed()
         }
-        text_view_action_bar_restaurant_name.text = restaurantView.name
         childFragmentManager.beginTransaction().replace(R.id.frame_layout_google_maps, mapFragment).commit()
     }
 
