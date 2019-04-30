@@ -1,17 +1,18 @@
 package io.github.viniciusalvesmello.restaurantguide.features.cities
 
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import io.github.viniciusalvesmello.restaurantguide.features.cities.model.CityView
+import io.github.viniciusalvesmello.restaurantguide.utils.extension.openRestaurantsFragment
 
 object CitiesBindingAdapter {
 
     @JvmStatic
-    @BindingAdapter("android:adapter")
-    fun setAdapterCities(recyclerView : RecyclerView, listCityView: List<CityView>){
-        recyclerView.adapter = CitiesAdapter(listCityView)
-        recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
+    @BindingAdapter("android:onClick")
+    fun onClickImageGoogleMaps(materialCardView : MaterialCardView, cityView : CityView) {
+        materialCardView.setOnClickListener {
+            it.openRestaurantsFragment(cityView)
+        }
     }
 
 }
