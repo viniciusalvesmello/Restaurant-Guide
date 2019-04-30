@@ -9,7 +9,7 @@ object CitiesBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("android:onClick")
-    fun onClickImageGoogleMaps(materialCardView : MaterialCardView, cityView : CityView) {
+    fun onClickCardViewCity(materialCardView : MaterialCardView, cityView : CityView) {
         materialCardView.setOnClickListener {
             it.openRestaurantsFragment(cityView)
         }
