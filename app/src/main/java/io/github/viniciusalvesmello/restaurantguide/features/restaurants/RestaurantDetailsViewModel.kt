@@ -3,7 +3,6 @@ package io.github.viniciusalvesmello.restaurantguide.features.restaurants
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
-import io.github.viniciusalvesmello.domain.features.restaurants.GetCategoriesRestaurants
 import io.github.viniciusalvesmello.domain.features.restaurants.GetRestaurantReviews
 import io.github.viniciusalvesmello.domain.features.restaurants.models.RestaurantReview
 import io.github.viniciusalvesmello.restaurantguide.AppApplication

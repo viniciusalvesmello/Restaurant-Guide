@@ -2,10 +2,6 @@ package io.github.viniciusalvesmello.restaurantguide.features.restaurants
 
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import io.github.viniciusalvesmello.restaurantguide.features.restaurants.RestaurantDetailsReviewsAdapter
-import io.github.viniciusalvesmello.restaurantguide.features.restaurants.model.RestaurantReviewView
 import io.github.viniciusalvesmello.restaurantguide.features.restaurants.model.RestaurantView
 import io.github.viniciusalvesmello.restaurantguide.utils.extension.openRestaurantMapsFragment
 
