@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.crashlytics.android.Crashlytics
@@ -13,6 +14,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import io.fabric.sdk.android.Fabric
 import io.github.viniciusalvesmello.restaurantguide.R
+import io.github.viniciusalvesmello.restaurantguide.databinding.RestaurantsFragmentBinding
 import io.github.viniciusalvesmello.restaurantguide.features.cities.model.CityView
 import io.github.viniciusalvesmello.restaurantguide.features.restaurants.model.CategoryRestaurantsView
 import io.github.viniciusalvesmello.restaurantguide.utils.extension.onBackPressed
@@ -25,6 +27,7 @@ class RestaurantsFragment : Fragment() {
         ViewModelProviders.of(this).get(RestaurantsViewModel::class.java)
     }
     private lateinit var cityView: CityView
+    private lateinit var binding : RestaurantsFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +35,11 @@ class RestaurantsFragment : Fragment() {
     ): View? {
         Fabric.with(context, Crashlytics())
         cityView = arguments?.toCityView() ?: CityView.toEmpty()
-        return inflater.inflate(R.layout.restaurants_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.restaurants_fragment, container, false)
+        binding.city = cityView
+        binding.viewmodel = viewModel
+        binding.recycleViewRestaurants.layoutManager = LinearLayoutManager(context)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -45,16 +52,9 @@ class RestaurantsFragment : Fragment() {
         constraint_layout_back_pressed.setOnClickListener {
             it.onBackPressed()
         }
-        val textCityName =
-            getString(R.string.name_city_in) + " " + cityView.name + getString(R.string.name_city_made_for_you)
-        text_view_action_bar_city_name.text = textCityName
     }
 
     private fun updateCategoriesAndRestaurants() {
-        viewModel.inProcessLoadRestaurants.observe(this, Observer { inProcessLoadRestaurants ->
-            if (inProcessLoadRestaurants) showProgressBar()
-            else hideProgressBar()
-        })
         chip_group_list_category.setOnCheckedChangeListener { _, chipId ->
             viewModel.setCategoryRestaurants(chipId)
             viewModel.startLoadRestaurants(false)
@@ -65,12 +65,10 @@ class RestaurantsFragment : Fragment() {
             }
         })
         viewModel.listRestaurants.observe(this, Observer { listRestaurants ->
-            recycle_view_restaurants.adapter = RestaurantsAdapter(
+            binding.recycleViewRestaurants.adapter = RestaurantsAdapter(
                 listRestaurants,
                 viewModel
             )
-            recycle_view_restaurants.layoutManager = LinearLayoutManager(context)
-            hideProgressBar()
         })
         viewModel.errorRestaurantsViewModel.observe(this, Observer { error ->
             showError(error)
@@ -98,10 +96,6 @@ class RestaurantsFragment : Fragment() {
         ).show()
         hideProgressBar()
         Crashlytics.logException(error)
-    }
-
-    private fun showProgressBar() {
-        progress_bar.visibility = View.VISIBLE
     }
 
     private fun hideProgressBar() {

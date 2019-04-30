@@ -27,4 +27,5 @@
     <string name="text_review">Texto do review</string>
     <string name="reviews">Avaliações</string>
     <string name="we_were_unable_to_process_your_request">Não foi possível processar sua solicitação!</string>
+    <string name="name">Nome</string>
 </resources>
