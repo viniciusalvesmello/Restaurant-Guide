@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.crashlytics.android.Crashlytics
 import com.google.android.material.snackbar.Snackbar
 import io.fabric.sdk.android.Fabric
@@ -23,6 +24,7 @@ class RestaurantDetailsFragment : Fragment() {
     private val viewModel: RestaurantDetailsViewModel by lazy {
         ViewModelProviders.of(this).get(RestaurantDetailsViewModel::class.java)
     }
+    private lateinit var binding : RestaurantDetailsFragmentBinding
     private lateinit var restaurantView: RestaurantView
 
 
@@ -32,11 +34,10 @@ class RestaurantDetailsFragment : Fragment() {
     ): View? {
         Fabric.with(context, Crashlytics())
         restaurantView = arguments?.toRestaurantView() ?: RestaurantView.toEmpty()
-        val binding : RestaurantDetailsFragmentBinding = DataBindingUtil.inflate(
-            inflater, R.layout.restaurant_details_fragment, container, false
-        )
+        binding = DataBindingUtil.inflate(inflater, R.layout.restaurant_details_fragment, container, false)
         binding.restaurant = restaurantView
         binding.viewmodel = viewModel
+        binding.recycleViewRestaurantReviews.layoutManager = LinearLayoutManager(context)
         return binding.root
     }
 
@@ -45,11 +46,15 @@ class RestaurantDetailsFragment : Fragment() {
         constraint_layout_back_pressed.setOnClickListener {
             it.onBackPressed()
         }
+        viewModel.listRestaurantReviews.observe(this, Observer { listRestaurantReviews ->
+            recycle_view_restaurant_reviews.adapter = RestaurantDetailsReviewsAdapter(listRestaurantReviews)
+        })
         viewModel.errorRestaurantDetailsViewModel.observe(this, Observer { error ->
             showError(error)
         })
         viewModel.startLoadRestaurantReviews(restaurantView.id)
     }
+
 
     private fun showError(error : Throwable) {
         Snackbar.make(
